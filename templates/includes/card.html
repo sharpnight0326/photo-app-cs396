@@ -1,0 +1,73 @@
+
+<body>
+{% if posts|length != 0 %}
+{% for item in posts %}
+<div class="card">
+    <div class="card-header">
+        <div class="card-name">
+            {{item.user.username}}
+        </div>
+        <div style="margin-right: 5%; margin-left: auto">
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+    </div>
+    <div class="card-img">
+        <img src="{{item.user.image_url}}" style="width: 100%; height: 100%" alt="post image">
+    </div>
+    <div class="card-operation">
+        <div class="like">
+            <i class="far fa-heart"></i>
+        </div>
+        <div class="message">
+            <i class="far fa-comment"></i>
+        </div>
+        <div class="forward">
+            <i class="far fa-paper-plane"></i>
+        </div>
+        <div class="mark">
+            <i class="far fa-bookmark"></i>
+        </div>
+    </div>
+    <div class="like-note">
+        <b>{{item.likes}} likes</b>
+    </div>
+    <div class="caption">
+        <div class="caption-who">
+            <b>{{item.user.username}}</b>
+        </div>
+        {% if item.title|length > 100 %}
+        {{item.title[0: 100]}}
+        {{"..."}}
+        {% else %}
+        {{item.title}}
+        {% endif %}
+        <div class="caption-more">more</div>
+    </div>
+    <div class="comment">
+        <div class="comment-count" style="">View all {{item.comments|length}} comments</div>
+        <div class="comment1">
+            {% if item.comments|length != 0 %}
+            <div class="comment-who">
+                <b>{{item.comments[0].user.username}}</b>
+            </div>
+            {% if item.comments[0].text|length > 20 %}
+            {{item.comments[0].text[0, 20]}}
+            {% endif %}
+            {{item.comments[0].text}}
+            {% endif %}
+        </div>
+        <span style="color: darkred; margin-left: 2%; margin-right: 0; width: 100%">{{item.display_time}}</span>
+    </div>
+    <div class="comment-input">
+        <div class="comment-add">
+            <div class="expression">
+                <i class="far fa-smile"></i>
+            </div>
+            <div class="input-space" style="color: darkred">Add a comment</div>
+        </div>
+        <div class="comment-btn">Post</div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+</body>

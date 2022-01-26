@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+</head>
+
+<body>
+
+ {% include 'includes/navbar.html' %}
+    <div id="container">
+        <div id="main-part">
+            {% include 'includes/stories.html' %}
+            {% include 'includes/card.html' %}
+        </div>
+
+        {% include 'includes/suggestions.html' %}
+    </div>
+
+</body>
+</html>
+<!--There can be a text box underneath the picture for users to input their alt-texts-->

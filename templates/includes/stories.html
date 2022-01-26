@@ -1,0 +1,15 @@
+
+<body>
+<div id="story-panel">
+    {% for item in stories %}
+    <div class="story">
+        <div class="story-img">
+            <img style="width: 100%; height: 100%; border-radius: 50%" src="{{item.user.profile_url}}" alt="story profile image">
+        </div>
+        <div class="story-name">
+            {{item.user.username}}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>

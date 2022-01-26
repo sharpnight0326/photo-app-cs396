@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="recommendation">
+    <div id="recomm-header">
+        <div id="img">
+            <img id="profile_img" style="width: 100%; height: 100%; border-radius: 50%" src="{{user.profile_url}}" alt="user profile image">
+        </div>
+        <div id="name">
+            {{user.username}}
+        </div>
+    </div>
+    <div id="recomm-suggestion">
+        <div id="sugg-text">
+            Suggestions for you
+        </div>
+        <div id="acc1">
+            <div class="acc-img">
+                <img style="width: 100%; height: 100%; border-radius: 50%" src="{{suggestions[0].image_url}}" alt="suggestion profile image">
+            </div>
+            <div class="acc-sugg">
+                <div class="acc-sugg-name">
+                    <b>{{suggestions[0].username}}</b>
+                </div>
+                <div class="acc-sugg-note">
+                    suggested
+                </div>
+            </div>
+            <div style="color: blue; margin-right: 3%">
+                follow
+            </div>
+        </div>
+        <div id="acc2">
+            <div class="acc-img">
+                <img style="width: 100%; height: 100%; border-radius: 50%" src="{{suggestions[1].image_url}}" alt="suggestion profile image">
+            </div>
+            <div class="acc-sugg">
+                <div class="acc-sugg-name">
+                    <b>{{suggestions[1].username}}</b>
+                </div>
+                <div class="acc-sugg-note">
+                    suggested
+                </div>
+            </div>
+            <div style="color: blue; margin-right: 3%">
+                follow
+            </div>
+        </div>
+        <div id="acc3">
+            <div class="acc-img">
+                <img style="width: 100%; height: 100%; border-radius: 50%" src="{{suggestions[2].image_url}}" alt="suggestion profile image">
+            </div>
+            <div class="acc-sugg">
+                <div class="acc-sugg-name">
+                    <b>{{suggestions[2].username}}</b>
+                </div>
+                <div class="acc-sugg-note">
+                    suggested
+                </div>
+            </div>
+            <div style="color: blue; margin-right: 3%">
+                follow
+            </div>
+        </div>
+        <div id="acc4">
+            <div class="acc-img">
+                <img style="width: 100%; height: 100%; border-radius: 50%" src="{{suggestions[3].image_url}}" alt="suggestion profile image">
+            </div>
+            <div class="acc-sugg">
+                <div class="acc-sugg-name">
+                    <b>{{suggestions[3].username}}</b>
+                </div>
+                <div class="acc-sugg-note">
+                    suggested
+                </div>
+            </div>
+            <div style="color: blue; margin-right: 3%">
+                follow
+            </div>
+        </div>
+        <div id="acc5">
+            <div class="acc-img">
+                <img style="width: 100%; height: 100%; border-radius: 50%" src="{{suggestions[4].image_url}}" alt="suggestion profile image">
+            </div>
+            <div class="acc-sugg">
+                <div class="acc-sugg-name">
+                    <b>{{suggestions[4].username}}</b>
+                </div>
+                <div class="acc-sugg-note">
+                    suggested
+                </div>
+            </div>
+            <div style="color: blue; margin-right: 3%">
+                follow
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -21,6 +21,8 @@ class ProfileDetailEndpoint(Resource):
             "image_url": self.current_user.image_url,
             "thumb_url": self.current_user.thumb_url
         }
+
+#         print(self.current_user.first_name)
         return Response(json.dumps(data), mimetype="application/json", status=200)
 
 

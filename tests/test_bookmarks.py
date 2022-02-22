@@ -14,6 +14,7 @@ class TestBookmarkListEndpoint(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         bookmarks = response.json()
         bookmark_ids = utils.get_bookmark_ids(self.current_user.get('id'))
+        print(bookmark_ids)
         self.assertTrue(len(bookmarks) > 1)
         for bookmark in bookmarks:
             # print(bookmark.get('id'), bookmark_ids)
@@ -157,8 +158,8 @@ if __name__ == '__main__':
         TestBookmarkListEndpoint('test_bookmark_post_invalid_post_id_404'),
         TestBookmarkListEndpoint('test_bookmark_post_unauthorized_post_id_404'),
         TestBookmarkListEndpoint('test_bookmark_post_missing_post_id_400'),
-#
-#         # DELETE Tests
+
+        # DELETE Tests
         TestBookmarkDetailEndpoint('test_bookmark_delete_valid_200'),
         TestBookmarkDetailEndpoint('test_bookmark_delete_invalid_id_format_400'),
         TestBookmarkDetailEndpoint('test_bookmark_delete_invalid_id_404'),

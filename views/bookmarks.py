@@ -22,25 +22,11 @@ class BookmarksListEndpoint(Resource):
         bookmarks_dict = [
             bookmark.to_dict() for bookmark in bookmarks
         ]
+#         for item in bookmarks_dict:
+#             print(item.get("id"))
 
         return Response(json.dumps(bookmarks_dict), mimetype="application/json", status=200)
 
-#         def handle_db_errors(self, func):
-#          try:
-#              return func(self)
-#          except:
-#              import sys
-#              db_message = str(sys.exc_info()[1]) # stores DB error message
-#              print(db_message)                   # logs it to the console
-#              message = 'Database Insert error. Make sure your post data is valid.'
-#              post_data = request.get_json()
-#              post_data['user_id'] = self.current_user.id
-#              response_obj = {
-#                  'message': message,
-#                  'db_message': db_message,
-#                  'post_data': post_data
-#              }
-#              return Response(json.dumps(response_obj), mimetype="application/json", status=400)
 
     def post(self):
 #     1. Get the post_id from the request body

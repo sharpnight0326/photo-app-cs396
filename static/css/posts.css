@@ -1,0 +1,28 @@
+#posts{
+    width: 50vw;
+}
+
+.post_user_name{
+    height: 2em;
+}
+
+#posts .post img{
+    width: 100%;
+}
+
+.post {
+    background: white;
+}
+
+.add-comment{
+    background: white;
+    margin-top: 1vh;
+    display: flex;
+    height: 2em;
+    align-items: center;
+}
+
+.post-operation{
+    display: flex;
+    flex-direction: row;
+}

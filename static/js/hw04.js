@@ -28,7 +28,7 @@ const posts2HTML = post => {
     return `
     <div class="post">
         <div class="post_user_name">
-            <p>${post.user.first_name} ${post.user.last_name}</p>
+            <strong>${post.user.first_name} ${post.user.last_name}</strong>
         </div>
         <img src="${post.image_url}">
         <div class="post-operation">
@@ -53,13 +53,13 @@ const posts2HTML = post => {
         </div>
         <div class="comments ${post.id}">
             <div class="comments-general">
-                <button data-action="viewbtn" data-postid="${post.id}" tabindex="0" onclick="openModal(${post.id}, event)">View all ${post.comments.length} comments</button>
+                <button data-action="viewbtn" class="viewcomments ${post.id}" data-postid="${post.id}" tabindex="0" onclick="openModal(${post.id}, event)">View all ${post.comments.length} comments</button>
             </div>
             <div>
                 ${displayComments(post.comments)}      
             </div>
         </div>
-        <div>
+        <div style="color: #777777">
             ${post.display_time}
         </div>
     </div>
@@ -81,8 +81,8 @@ const posts2HTML = post => {
 const displayComments = comments =>{
     if (comments && comments.length > 0) {
         return `
-            <div><strong>${comments[0].user.username}</strong>${comments[0].text}</div>
-            <div>${comments[0].timestamp}</div>
+            <div><strong>${comments[0].user.username}</strong> ${comments[0].text}</div>
+            <div style="color: #777777">${comments[0].timestamp}</div>
         `
     }
     else return `<div></div>`
@@ -149,7 +149,7 @@ const openModal = (postId, ev) => {
         .then(post => {
             const html = `
                 <div class="modal-bg" tabindex="1">
-                    <button autofocus="autofocus" onclick="destroyModal(event)" tabindex="99" data-action="closebtn" id="close">Close</button>
+                    <button autofocus="autofocus" onclick="destroyModal(${postId}, event)" tabindex="99" data-action="closebtn" id="close" data-postId="${post.id}">Close</button>
                     <div class="modal">
                         <img src="${post.image_url}">
                         <div style="overflow: scroll">${post.comments.map(comment2HTML).join('\n')}</div>
@@ -170,7 +170,7 @@ postsDiv.addEventListener("keypress", function(event) {
     if (event.keyCode === 13) {
         if (event.target.dataset.action==="closebtn") {
             event.preventDefault();
-            destroyModal(event)
+            destroyModal(event.target.dataset.postId, event)
         }
     }
 });
@@ -178,7 +178,7 @@ window.addEventListener("keydown", function(event) {
     if (event.key === "Escape") {
         if (document.querySelector(".modal-bg")) {
             event.preventDefault();
-            destroyModal(event)
+            destroyModal(event.target.dataset.postId, event)
         }
     }
 });
@@ -190,8 +190,11 @@ const comment2HTML = comment =>{
             `
 }
 
-const destroyModal = (ev) =>{
+const destroyModal = (postId, ev) =>{
     document.querySelector("#modal-container").innerHTML = "";
+    const viewCommentsClassName = `viewcomments ${postId}`
+    document.querySelector("[class=" + CSS.escape(viewCommentsClassName) + "]").focus()
+
 }
 
 const getPosts = () =>{

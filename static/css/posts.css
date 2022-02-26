@@ -18,11 +18,37 @@
     background: white;
     margin-top: 1vh;
     display: flex;
-    height: 2em;
+    height: 3em;
     align-items: center;
+    box-sizing: border-box;
+}
+
+.add-comment input{
+    float: left;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -ms-box-sizing: border-box; /* ie8 */
+    -khtml-box-sizing: border-box; /* konqueror */
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    box-sizing: border-box; /* css3 rec */
+    outline: none;
+    border: none;
 }
 
 .post-operation{
     display: flex;
     flex-direction: row;
+}
+
+.comments-general button{
+    background-color: white;
+    color: cornflowerblue;
+    border: none;
+}
+
+.liked {
+    color: red;
 }

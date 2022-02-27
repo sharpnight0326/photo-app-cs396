@@ -367,7 +367,7 @@ const user2Html = user => {
                 <p class="suggestion-text">Suggested for you</p>
             </div>
             <div>
-                <button aria-label="button" class="follow" style="border: none;outline: none;color: cornflowerblue" data-action="suggestfollowbtn" data-user-id="${user.id}" tabindex="0">follow</button>
+                <button aria-label="button" class="follow" style="border: none;color: cornflowerblue" data-action="suggestfollowbtn" data-user-id="${user.id}" tabindex="0">follow</button>
             </div>
     </div>
     `

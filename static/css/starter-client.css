@@ -306,3 +306,7 @@ aside header .pic {
 .follow:hover{
     color: #777777;
 }
+
+.follow:focus{
+    outline: 2px solid black;
+}

@@ -50,7 +50,11 @@ const posts2HTML = post => {
         </div>
         <div class="caption">
             <p><strong>${post.user.username}</strong> ${post.caption}</p>
+            <p style="color: #777777">${post.display_time}</p>
         </div>
+<!--        <div style="color: #777777; margin-top: 0px">-->
+<!--            -->
+<!--        </div>-->
         <div class="comments ${post.id}">
             <div class="comments-general">
                 <button data-action="viewbtn" class="viewcomments ${post.id}" data-postid="${post.id}" tabindex="0" onclick="openModal(${post.id}, event)">View all ${post.comments.length} comments</button>
@@ -59,16 +63,13 @@ const posts2HTML = post => {
                 ${displayComments(post.comments)}      
             </div>
         </div>
-        <div style="color: #777777">
-            ${post.display_time}
-        </div>
     </div>
     <div class="add-comment">
         <div style="flex:0 0 90%;" >
             <input class="input ${post.id}" placeholder="Add a comment..." />
         </div>
         <div style="flex: 1;">
-            <button class="btn ${post.id}" data-action="postbtn" data-postid="${post.id}" tabindex="0" onclick="addComment(${post.id})">Post</button>
+            <button class="btn ${post.id}" data-action="postbtn" data-postid="${post.id}" tabindex="0" onclick="addComment(${post.id})" style="border: none; color: cornflowerblue; background: white">Post</button>
         </div>
     </div>
     `
@@ -178,15 +179,25 @@ window.addEventListener("keydown", function(event) {
     if (event.key === "Escape") {
         if (document.querySelector(".modal-bg")) {
             event.preventDefault();
-            destroyModal(event.target.dataset.postId, event)
+            // console.log(event.target)
+            destroyModal(event.target.dataset.postid, event)
         }
     }
 });
 
 const comment2HTML = comment =>{
-    return `<div><strong>${comment.user.username}</strong></div>
-            <div>${comment.text}</div>
-            <div><strong>${comment.timestamp}</strong></div>
+    return `<div id="modal-comments">
+                <div><img src="${comment.user.thumb_url}" style="border-radius: 50%"></div>
+                <div style="margin-left: 1%">
+                    <strong>${comment.user.username} </strong>
+                    ${comment.text}
+                    <br><strong>${comment.timestamp}</strong>
+                </div>
+                <div style="margin-left: auto; margin-right: 0px">
+                    <i class="far fa-heart"></i>
+                </div>
+   
+            </div>
             `
 }
 
@@ -356,7 +367,7 @@ const user2Html = user => {
                 <p class="suggestion-text">Suggested for you</p>
             </div>
             <div>
-                <button aria-label="button" class="follow" data-action="suggestfollowbtn" data-user-id="${user.id}" tabindex="0">follow</button>
+                <button aria-label="button" class="follow" style="border: none;outline: none;color: cornflowerblue" data-action="suggestfollowbtn" data-user-id="${user.id}" tabindex="0">follow</button>
             </div>
     </div>
     `
@@ -409,6 +420,8 @@ const createFollowing = (userId, elem) => {
             elem.innerHTML = "unfollow"
             elem.classList.add("unfollow")
             elem.classList.remove("follow")
+            elem.style.background="white"
+            elem.style.border="solid"
             elem.setAttribute("aria-checked", true)
             elem.setAttribute("data-following-id", data.id)
             console.log(data)
@@ -428,6 +441,8 @@ const deleteFollowing = (followingId, elem) =>{
             elem.innerHTML = "follow"
             elem.classList.add("follow")
             elem.classList.remove("unfollow")
+            elem.style.background="none"
+            elem.style.border="none"
             elem.removeAttribute(elem.dataset.followingId)
             elem.setAttribute("aria-checked", false)
             console.log(data);

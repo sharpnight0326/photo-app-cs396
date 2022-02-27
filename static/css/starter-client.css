@@ -296,3 +296,13 @@ aside header .pic {
     display: flex;
     flex-direction: row;
 }
+
+#modal-comments{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+}
+
+.follow:hover{
+    color: #777777;
+}

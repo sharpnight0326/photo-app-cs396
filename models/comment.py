@@ -1,5 +1,7 @@
 from datetime import datetime
 from . import db
+from .utils import get_display_time
+
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -29,5 +31,6 @@ class Comment(db.Model):
             'id': self.id,
             'text': self.text,
             'post_id': self.post_id,
-            'user': self.user.to_dict()
+            'user': self.user.to_dict(),
+            'timestamp': get_display_time(self.pub_date)
         }

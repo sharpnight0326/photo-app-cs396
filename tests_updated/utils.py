@@ -1,5 +1,9 @@
 import os
+import requests
+from flask import Flask
 from sqlalchemy import create_engine, inspect
+import flask_jwt_extended
+import random
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -12,7 +16,8 @@ def modify_system_path():
 
 modify_system_path()
 
-root_url = 'http://127.0.0.1:5000/'
+# root_url = 'http://127.0.0.1:5000'
+root_url = 'https://photo-app-xwc.herokuapp.com'
 
 connection_string = os.environ.get('DB_URL')
 db = create_engine(connection_string, pool_size=10, max_overflow=0)
@@ -29,6 +34,8 @@ def _zip(columns, rows, single_object=True):
     else:
         return results
 
+def get_random_user():
+    return get_user(random.randint(1, 30))
 
 def get_user_12():
     with db.connect() as conn:
@@ -412,4 +419,69 @@ def get_liked_post_by_id(id):
 
 def get_following_by_id(id):
     return get_x_by_id('following', id)
-        
+
+def create_dummy_app():
+    app = Flask(__name__)
+
+    #JWT:
+    app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET')  # Change this "super secret" with something else!
+    app.config["JWT_TOKEN_LOCATION"] = ["headers", "cookies"]
+    app.config["JWT_COOKIE_SECURE"] = False
+    flask_jwt_extended.JWTManager(app)
+    return app
+
+def get_access_token(user_id):
+    app = create_dummy_app()
+    with app.app_context():
+        token = flask_jwt_extended.create_access_token(identity=user_id)
+        return token
+
+def get_refresh_token(user_id):
+    app = create_dummy_app()
+    with app.app_context():
+        token = flask_jwt_extended.create_refresh_token(identity=user_id)
+        return token
+
+def get_expired_refresh_token(user_id):
+    app = create_dummy_app()
+    with app.app_context():
+        from datetime import timedelta
+        import time
+        exp = timedelta(microseconds=1)
+        token = flask_jwt_extended.create_refresh_token(identity=user_id, expires_delta=exp)
+        # engineer a delay so that the refresh token expires:
+        time.sleep(0.01)
+        return token
+
+def issue_get_request(url, user_id):
+    access_token = get_access_token(user_id=user_id)
+    return requests.get(
+        url, 
+        headers={
+            'Authorization': 'Bearer ' + access_token
+        })
+def issue_delete_request(url, user_id):
+    token = get_access_token(user_id=user_id)
+    return requests.delete(
+        url, 
+        headers={
+            'Authorization': 'Bearer ' + token
+        })
+
+def issue_post_request(url, json, user_id):
+    access_token = get_access_token(user_id=user_id)
+    return requests.post(
+        url, 
+        json=json,
+        headers={
+            'Authorization': 'Bearer ' + access_token
+        })
+
+def issue_patch_request(url, json, user_id):
+    access_token = get_access_token(user_id=user_id)
+    return requests.patch(
+        url, 
+        json=json,
+        headers={
+            'Authorization': 'Bearer ' + access_token
+        })

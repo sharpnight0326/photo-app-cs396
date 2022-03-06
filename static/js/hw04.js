@@ -508,8 +508,10 @@ const getProfile = () =>{
         .then(response => response.json())
         .then(data => {
             const html = `
-                <img src="${data.thumb_url}">
-                <div>${data.username}</div>
+                <div id="profile-pic-name">
+                    <img src="${data.thumb_url}" style="border-radius: 50%; width: 2em">
+                    <div style="margin-left: 2%">${data.username}</div>
+                </div>
             `
             document.querySelector("#suggestion-profile").innerHTML = html
         })

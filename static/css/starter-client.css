@@ -398,4 +398,9 @@ aside header .pic {
     color: red;
 }
 
+#profile-pic-name{
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+}
 
